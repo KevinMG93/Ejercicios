@@ -77,15 +77,18 @@ public class FichaPolicia extends JFrame {
 		
 		delincuentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				// Para que al darle aL ComboBox te coja los datos
+				// Explicar paco
+				// Sirve para seleccionar la posicion y que pueda luego devolver los datos
 				delincuente=delincuentes.getItemAt(delincuentes.getSelectedIndex());
+				if(delincuente!=null)
+				{
 				// Muestre los datos
 					Nombre.setText(delincuente.getNombre());
 					Apellidos.setText(delincuente.getApellidos());
 					Edad.setText(String.valueOf(delincuente.getEdad()));
 					Altura.setText(String.valueOf(delincuente.getAltura()));
 					Crimen.setText(delincuente.getCrimen());	
+				}
 			}
 		});
 		
@@ -215,7 +218,7 @@ public class FichaPolicia extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Borra el Objeto (delincuente) seleccionado
-				delincuentes.removeItem(delincuente);
+				delincuentes.removeItemAt(delincuentes.getSelectedIndex());
 				
 			}
 		});
