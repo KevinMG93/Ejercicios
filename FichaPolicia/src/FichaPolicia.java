@@ -73,22 +73,23 @@ public class FichaPolicia extends JFrame {
 		
 		// Combo
 		delincuentes = new JComboBox<Delincuente>();
+		
 		delincuentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
-				Nombre.setText(delincuente.getNombre());
-				Apellidos.setText(delincuente.getApellidos());
-				Edad.setText(String.valueOf(delincuente.getEdad()));
-				Altura.setText(String.valueOf(delincuente.getAltura()));
-				Crimen.setText(delincuente.getCrimen());				
-				
+				// Para que al darle aL ComboBox te coja los datos
+				delincuente=delincuentes.getItemAt(delincuentes.getSelectedIndex());
+				// Muestre los datos
+					Nombre.setText(delincuente.getNombre());
+					Apellidos.setText(delincuente.getApellidos());
+					Edad.setText(String.valueOf(delincuente.getEdad()));
+					Altura.setText(String.valueOf(delincuente.getAltura()));
+					Crimen.setText(delincuente.getCrimen());	
 			}
 		});
+		
+
 		delincuentes.setBounds(10, 49, 414, 20);
-		// Añadir
-		delincuentes.addItem(new Delincuente ("Jose","Fuente",40,175,"Omicidio"));
-		delincuentes.addItem(new Delincuente ("Joan","Ivars",21,181,"Ser tontin"));
 		contentPane.add(delincuentes);
 		
 		JLabel lblNombreDelicuente = new JLabel("Ficha");
@@ -153,14 +154,15 @@ public class FichaPolicia extends JFrame {
 				}
 				
 				else {
-				
+				// Creamos los OBJETOS delincuentes
 				Delincuente D =new Delincuente();	
-				delincuente.setNombre(Nombre.getText());
-				delincuente.setApellidos(Apellidos.getText());
-				delincuente.setEdad(Integer.parseInt(Edad.getText()));
-				delincuente.setAltura(Integer.parseInt(Altura.getText()));
-				delincuente.setCrimen(Crimen.getText());
-				delincuentes.addItem(delincuente);
+				D.setNombre(Nombre.getText());
+				D.setApellidos(Apellidos.getText());
+				D.setEdad(Integer.parseInt(Edad.getText()));
+				D.setAltura(Integer.parseInt(Altura.getText()));
+				D.setCrimen(Crimen.getText());
+				// Lo almacenamos al ComboBox
+				delincuentes.addItem(D);
 				}
 				
 			}
@@ -189,11 +191,41 @@ public class FichaPolicia extends JFrame {
 				colocarDatos(delincuente);
 			}
 		});
-		btnPorDefecto.setBounds(121, 272, 89, 23);
+		btnPorDefecto.setBounds(121, 272, 98, 23);
 		contentPane.add(btnPorDefecto);
+		
+		JButton btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// Modifica los datos guardados (Machaca los datos nuevos sobre los ya establecidos)
+				delincuente.setNombre(Nombre.getText());
+				delincuente.setApellidos(Apellidos.getText());
+				delincuente.setEdad(Integer.parseInt(Edad.getText()));
+				delincuente.setAltura(Integer.parseInt(Altura.getText()));
+				delincuente.setCrimen(Crimen.getText());
+				
+			}
+		});
+		btnModificar.setBounds(240, 272, 89, 23);
+		contentPane.add(btnModificar);
+		
+		JButton btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//Borra el Objeto (delincuente) seleccionado
+				delincuentes.removeItem(delincuente);
+				
+			}
+		});
+		btnBorrar.setBounds(121, 303, 98, 23);
+		contentPane.add(btnBorrar);
+		
+		// Añadir Objetos al ComboBox
+		delincuentes.addItem(new Delincuente ("Jose","Fuente",40,175,"Omicidio"));
+		delincuentes.addItem(new Delincuente ("Joan","Ivars",21,181,"Ser tontin"));
 	}
 	private void colocarDatos(Delincuente delincuente){
-		Nombre.setText(delincuente.getNombre());
-		Apellidos.setText(delincuente.getApellidos());
+		Crimen.setText(delincuente.getCrimen());
 	}
 }
