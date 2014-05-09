@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
+// Acavado parte 2
 
 public class FichaPolicia extends JFrame {
 
