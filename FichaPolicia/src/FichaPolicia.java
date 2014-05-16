@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
-// Acavado parte 2
+// Acabado parte 2
 
 public class FichaPolicia extends JFrame {
 
@@ -201,6 +201,7 @@ public class FichaPolicia extends JFrame {
 		JButton btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				// Modifica los datos guardados (Machaca los datos nuevos sobre los ya establecidos)
 				delincuente.setNombre(Nombre.getText());
 				delincuente.setApellidos(Apellidos.getText());

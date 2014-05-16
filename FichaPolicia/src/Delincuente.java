@@ -82,6 +82,8 @@ public class Delincuente {
 	
 	public String toString(){
 		
+		// Pueden aparecer mas datos en el titulo si concatenas
+		
 		return Nombre;
 	}
 
