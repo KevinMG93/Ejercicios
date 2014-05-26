@@ -15,8 +15,12 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 // Acabado parte 2
 
@@ -30,6 +34,10 @@ public class FichaPolicia extends JFrame {
 	private JTextField Altura;
 	private JTextField Crimen;
 	private Delincuente delincuente;
+	private BD Datos;
+	Connection conexion = null; //maneja la conexión
+	Statement instruccion = null;// instrucción de consulta
+	ResultSet conjuntoResultados = null;// maneja los resultadoslk´
 	
 	//ComboBox para guardar delincuentes
 	private JComboBox<Delincuente> delincuentes;
@@ -141,6 +149,8 @@ public class FichaPolicia extends JFrame {
 				//2.- Crearemos un nuevo objeto delincuente
 				//3.- Lo almacenaremos en el ComboBox
 				
+				
+				
 				if(Nombre.getText().equals("")){
 					JOptionPane.showMessageDialog(null,"Error");
 				}
@@ -160,11 +170,12 @@ public class FichaPolicia extends JFrame {
 				else {
 				// Creamos los OBJETOS delincuentes
 				Delincuente D =new Delincuente();	
-				D.setNombre(Nombre.getText());
-				D.setApellidos(Apellidos.getText());
-				D.setEdad(Integer.parseInt(Edad.getText()));
-				D.setAltura(Integer.parseInt(Altura.getText()));
-				D.setCrimen(Crimen.getText());
+				// Sirve para guardar en la base de datos
+				Datos.insertarDelincuentes(Nombre.getText(),Apellidos.getText(),Integer.parseInt(Edad.getText()),Integer.parseInt(Altura.getText()),Crimen.getText());
+				//D.setApellidos(Apellidos.getText());
+				//D.setEdad(Integer.parseInt(Edad.getText()));
+				//D.setAltura(Integer.parseInt(Altura.getText()));
+				//D.setCrimen(Crimen.getText());
 				// Lo almacenamos al ComboBox
 				delincuentes.addItem(D);
 				}
@@ -226,11 +237,18 @@ public class FichaPolicia extends JFrame {
 		btnBorrar.setBounds(121, 303, 98, 23);
 		contentPane.add(btnBorrar);
 		
+		Datos=new BD (delincuentes);
+		Datos.leerDelincuentes();
+
+		
 		// Añadir Objetos al ComboBox
 		delincuentes.addItem(new Delincuente ("Jose","Fuente",40,175,"Omicidio"));
 		delincuentes.addItem(new Delincuente ("Joan","Ivars",21,181,"Ser tontin"));
 	}
 	private void colocarDatos(Delincuente delincuente){
 		Crimen.setText(delincuente.getCrimen());
+		
+		}
 	}
-}
+	
+
