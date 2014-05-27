@@ -8,14 +8,17 @@ import javax.swing.JComboBox;
 
 public class BD {
 	
+	
 	Connection conexion = null; //maneja la conexión
 	Statement instruccion = null;// instrucción de consulta
 	ResultSet conjuntoResultados = null;// maneja los resultadoslk´
-	JComboBox listadoDelincuentes;
+	JComboBox  listadoDelincuentes;
 
 	public BD() {
 		// TODO Auto-generated constructor stub
 		crearConexion();
+		// Sirve para que pueda ver el comboBox
+		this.listadoDelincuentes=listadoDelincuentes;
 	}
 	
 		public BD(JComboBox<Delincuente> delincuentes) {
@@ -41,7 +44,7 @@ public class BD {
 		}
 	
 		
-		public void leerDelincuentes (JComboBox listadoDelincuentes){
+		public void leerDelincuentes (JComboBox  listadoDelincuentes){
 			
 			try {
 			// crea objeto Statement para consultar la base de datos
@@ -72,7 +75,7 @@ public class BD {
 			}
 			// insercion en base de datos
 			try {
-				instruccion.executeUpdate("INSERT INTO `fichapolicial`.`fichadelincuentes` ( `Nombre`, `Apellidos`, `Edad`, `Altura`, `Crimen`) VALUES ("
+				instruccion.executeUpdate("INSERT INTO 'fichapolicial'.'fichadelincuentes' ( 'Nombre', 'Apellidos', 'Edad', 'Altura', 'Crimen') VALUES ("
 				+ "'"+Nombre+"',"
 				+ "'"+Apellidos+"',"
 				+ "'"+Edad+"',"

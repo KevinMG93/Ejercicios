@@ -22,7 +22,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-// Acabado parte 2
 
 public class FichaPolicia extends JFrame {
 
@@ -172,10 +171,10 @@ public class FichaPolicia extends JFrame {
 				Delincuente D =new Delincuente();	
 				// Sirve para guardar en la base de datos
 				Datos.insertarDelincuentes(Nombre.getText(),Apellidos.getText(),Integer.parseInt(Edad.getText()),Integer.parseInt(Altura.getText()),Crimen.getText());
-				//D.setApellidos(Apellidos.getText());
-				//D.setEdad(Integer.parseInt(Edad.getText()));
-				//D.setAltura(Integer.parseInt(Altura.getText()));
-				//D.setCrimen(Crimen.getText());
+				D.setApellidos(Apellidos.getText());
+				D.setEdad(Integer.parseInt(Edad.getText()));
+				D.setAltura(Integer.parseInt(Altura.getText()));
+				D.setCrimen(Crimen.getText());
 				// Lo almacenamos al ComboBox
 				delincuentes.addItem(D);
 				}
@@ -238,7 +237,7 @@ public class FichaPolicia extends JFrame {
 		contentPane.add(btnBorrar);
 		
 		Datos=new BD (delincuentes);
-		Datos.leerDelincuentes();
+		//Datos.leerDelincuentes();
 
 		
 		// Añadir Objetos al ComboBox
