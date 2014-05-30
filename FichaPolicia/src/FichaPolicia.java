@@ -34,9 +34,6 @@ public class FichaPolicia extends JFrame {
 	private JTextField Crimen;
 	private Delincuente delincuente;
 	private BD Datos;
-	Connection conexion = null; //maneja la conexión
-	Statement instruccion = null;// instrucción de consulta
-	ResultSet conjuntoResultados = null;// maneja los resultadoslk´
 	
 	//ComboBox para guardar delincuentes
 	private JComboBox<Delincuente> delincuentes;
@@ -237,7 +234,7 @@ public class FichaPolicia extends JFrame {
 		contentPane.add(btnBorrar);
 		
 		Datos=new BD (delincuentes);
-		//Datos.leerDelincuentes();
+		Datos.leerDelincuentes();
 
 		
 		// Añadir Objetos al ComboBox

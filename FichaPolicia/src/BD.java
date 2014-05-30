@@ -12,17 +12,14 @@ public class BD {
 	Connection conexion = null; //maneja la conexión
 	Statement instruccion = null;// instrucción de consulta
 	ResultSet conjuntoResultados = null;// maneja los resultadoslk´
-	JComboBox  listadoDelincuentes;
+	JComboBox <Delincuente> listadoDelincuentes;
 
-	public BD() {
-		// TODO Auto-generated constructor stub
-		crearConexion();
-		// Sirve para que pueda ver el comboBox
-		this.listadoDelincuentes=listadoDelincuentes;
-	}
 	
-		public BD(JComboBox<Delincuente> delincuentes) {
-		// TODO Auto-generated constructor stub
+		public BD(JComboBox <Delincuente> delincuentes) {
+			// TODO Auto-generated constructor stub
+			crearConexion();
+			// Sirve para que pueda ver el comboBox
+			this.listadoDelincuentes=delincuentes;
 	}
 
 		private void crearConexion(){
@@ -44,20 +41,33 @@ public class BD {
 		}
 	
 		
-		public void leerDelincuentes (JComboBox  listadoDelincuentes){
+		public void leerDelincuentes (){
 			
 			try {
 			// crea objeto Statement para consultar la base de datos
 				instruccion = (Statement) conexion.createStatement();
 			// consulta la base de datos
-				conjuntoResultados = instruccion.executeQuery("SELECT idDelincuentes,Nombre FROM fichadelincuentes");
+				conjuntoResultados = instruccion.executeQuery("SELECT * FROM fichadelincuentes");
 			//Mostrar por pantalla
 				while (conjuntoResultados.next())
 				{
 				System.out.println("id="+conjuntoResultados.getObject("idDelincuentes")+
 				", Nombre="+conjuntoResultados.getObject("Nombre"));
+				
+				//Muestra el contenido de delincuentes de nuestra base de datos
+					Delincuente D =new Delincuente
+					//Coje los datos para mostrarlos
+					((String)conjuntoResultados.getObject("Nombre"),
+					(String)conjuntoResultados.getObject("Apellidos"),
+					(int)conjuntoResultados.getObject("Edad"),
+					(int)conjuntoResultados.getObject("Altura"),
+					(String)conjuntoResultados.getObject("Crimen"));
+					listadoDelincuentes.addItem(D);
+				
 				}
 				conjuntoResultados.close();
+				
+			
 			}catch( SQLException excepcionSql ){
 				excepcionSql.printStackTrace();
 			}// fin de catch
@@ -75,13 +85,15 @@ public class BD {
 			}
 			// insercion en base de datos
 			try {
-				instruccion.executeUpdate("INSERT INTO 'fichapolicial'.'fichadelincuentes' ( 'Nombre', 'Apellidos', 'Edad', 'Altura', 'Crimen') VALUES ("
+				String sql="INSERT INTO `fichapolicial`.`fichadelincuentes` ( Nombre, Apellidos, Edad, Altura, Crimen) VALUES ("
 				+ "'"+Nombre+"',"
 				+ "'"+Apellidos+"',"
 				+ "'"+Edad+"',"
 				+ "'"+Altura+"'," 
-				+ "'"+Crimen+"'"
-				);
+				+ "'"+Crimen+"');";
+				
+				instruccion.executeUpdate(sql);
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -89,7 +101,7 @@ public class BD {
 			//Compruebo la insercion
 		
 			listadoDelincuentes.removeAllItems();
-			leerDelincuentes(listadoDelincuentes);
+			//leerDelincuentes(listadoDelincuentes);
 			
 		}
 		
