@@ -32,11 +32,13 @@ public class FichaPolicia extends JFrame {
 	private JTextField Edad;
 	private JTextField Altura;
 	private JTextField Crimen;
+	private JTextField idDelincuentes;
 	private Delincuente delincuente;
 	private BD Datos;
 	
 	//ComboBox para guardar delincuentes
 	private JComboBox<Delincuente> delincuentes;
+	private JTextField ID;
 
 
 	//Lanza la aplicación
@@ -86,12 +88,14 @@ public class FichaPolicia extends JFrame {
 				delincuente=delincuentes.getItemAt(delincuentes.getSelectedIndex());
 				if(delincuente!=null)
 				{
-				// Muestre los datos
+					// Muestre los datos
+					idDelincuentes.setText(String.valueOf(delincuente.getEdad()));
 					Nombre.setText(delincuente.getNombre());
 					Apellidos.setText(delincuente.getApellidos());
 					Edad.setText(String.valueOf(delincuente.getEdad()));
 					Altura.setText(String.valueOf(delincuente.getAltura()));
 					Crimen.setText(delincuente.getCrimen());	
+					
 				}
 			}
 		});
@@ -167,11 +171,12 @@ public class FichaPolicia extends JFrame {
 				// Creamos los OBJETOS delincuentes
 				Delincuente D =new Delincuente();	
 				// Sirve para guardar en la base de datos
-				Datos.insertarDelincuentes(Nombre.getText(),Apellidos.getText(),Integer.parseInt(Edad.getText()),Integer.parseInt(Altura.getText()),Crimen.getText());
+				Datos.insertarDelincuentes(Integer.parseInt(idDelincuentes.getText()),Nombre.getText(),Apellidos.getText(),Integer.parseInt(Edad.getText()),Integer.parseInt(Altura.getText()),Crimen.getText());
 				D.setApellidos(Apellidos.getText());
 				D.setEdad(Integer.parseInt(Edad.getText()));
 				D.setAltura(Integer.parseInt(Altura.getText()));
 				D.setCrimen(Crimen.getText());
+				D.setidDelincuentes(Integer.parseInt(idDelincuentes.getText()));
 				// Lo almacenamos al ComboBox
 				delincuentes.addItem(D);
 				}
@@ -209,6 +214,8 @@ public class FichaPolicia extends JFrame {
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				// Para modificar desde la base de datos
+				Datos.modificarDelincuentes(Integer.parseInt(idDelincuentes.getText()),Nombre.getText(),Apellidos.getText(),Integer.parseInt(Edad.getText()),Integer.parseInt(Altura.getText()),Crimen.getText());
 				// Modifica los datos guardados (Machaca los datos nuevos sobre los ya establecidos)
 				delincuente.setNombre(Nombre.getText());
 				delincuente.setApellidos(Apellidos.getText());
@@ -234,12 +241,22 @@ public class FichaPolicia extends JFrame {
 		contentPane.add(btnBorrar);
 		
 		Datos=new BD (delincuentes);
+		
+		ID = new JTextField();
+		ID.setEditable(false);
+		ID.setBounds(148, 222, 86, 20);
+		contentPane.add(ID);
+		ID.setColumns(10);
+		
+		JLabel lblID = new JLabel("ID");
+		lblID.setBounds(148, 197, 46, 14);
+		contentPane.add(lblID);
 		Datos.leerDelincuentes();
 
 		
 		// Añadir Objetos al ComboBox
-		delincuentes.addItem(new Delincuente ("Jose","Fuente",40,175,"Omicidio"));
-		delincuentes.addItem(new Delincuente ("Joan","Ivars",21,181,"Ser tontin"));
+		delincuentes.addItem(new Delincuente (2,"Jose","Fuente",40,175,"Omicidio"));
+		delincuentes.addItem(new Delincuente (3,"Joan","Ivars",21,181,"Ser tontin"));
 	}
 	private void colocarDatos(Delincuente delincuente){
 		Crimen.setText(delincuente.getCrimen());

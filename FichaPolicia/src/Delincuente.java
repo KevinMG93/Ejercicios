@@ -4,6 +4,7 @@ public class Delincuente {
 	//Atributos para guardar
 	//Tienen que ser los atributos de la pantalla
 	
+	private int idDelincuentes;
 	private String Nombre;
 	private String Apellidos;
 	private int Edad;
@@ -13,17 +14,20 @@ public class Delincuente {
 	
 	public Delincuente() {
 		
+		idDelincuentes=1;
 		Nombre="Mariano";
 		Apellidos="Rajoy";
 		Edad=5;
 		Altura=140;
-		Crimen="Robo a mano armada";	
+		Crimen="Robo a mano armada";
+		
 	}
 	
-	public Delincuente(String Nom,String Ape,int Ed,int Altu,String Cri) {
+	public Delincuente(int ID,String Nom,String Ape,int Ed,int Altu,String Cri) {
 		
 	// Inicializamos
 		
+		idDelincuentes=ID;
 		Nombre=Nom;
 		Apellidos=Ape;
 		Edad=Ed;
@@ -34,7 +38,13 @@ public class Delincuente {
 	//Falta por crear
 	//Los métodos de guardado y recuperación
 	
+	public void setidDelincuentes (int ID){
+		idDelincuentes=ID;
+	}
 	
+	public int getidDelincuentes (){
+		return idDelincuentes;
+	}
 	
 	public void setNombre (String Nom){
 	Nombre=Nom;

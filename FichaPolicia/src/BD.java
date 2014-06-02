@@ -57,7 +57,8 @@ public class BD {
 				//Muestra el contenido de delincuentes de nuestra base de datos
 					Delincuente D =new Delincuente
 					//Coje los datos para mostrarlos
-					((String)conjuntoResultados.getObject("Nombre"),
+					((int)conjuntoResultados.getObject("idDelincuentes"),
+					(String)conjuntoResultados.getObject("Nombre"),
 					(String)conjuntoResultados.getObject("Apellidos"),
 					(int)conjuntoResultados.getObject("Edad"),
 					(int)conjuntoResultados.getObject("Altura"),
@@ -86,11 +87,13 @@ public class BD {
 			// insercion en base de datos
 			try {
 				String sql="INSERT INTO `fichapolicial`.`fichadelincuentes` ( Nombre, Apellidos, Edad, Altura, Crimen) VALUES ("
+				//+ "'"+idDelincuentes+"',"
 				+ "'"+Nombre+"',"
 				+ "'"+Apellidos+"',"
 				+ "'"+Edad+"',"
 				+ "'"+Altura+"'," 
 				+ "'"+Crimen+"');";
+				
 				
 				instruccion.executeUpdate(sql);
 				
@@ -100,11 +103,45 @@ public class BD {
 			}
 			//Compruebo la insercion
 		
-			listadoDelincuentes.removeAllItems();
+			//listadoDelincuentes.removeAllItems();
 			//leerDelincuentes(listadoDelincuentes);
-			
+		
 		}
 		
+		public void modificarDelincuentes (int ID,String Nombre,String Apellidos,int Edad,int Altura,String Crimen){
+			
+		// crea objeto Statement para consultar la base de datos
+			try {
+			instruccion = (Statement) conexion.createStatement();
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+			// insercion en base de datos
+				try {
+					
+				String sql= " UPDATE  `fichapolicial`.`fichadelincuentes` SET " 
+						
+					Nombre =  '"+Nombre+"'",
+					Apellidos = '"+Apellidos+"'",
+					Edad =  '"+Edad+"'",
+					Altura =  '"+Altura+"'",
+					Crimen =  '"+Crimen+"'"
+					WHERE  `fichadelincuentes`.`IdDelincuentes` ="IdDelincuentes";
+
+				instruccion.executeUpdate(sql);
+							
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+			//Compruebo la insercion
+					
+			//listadoDelincuentes.removeAllItems();
+			//leerDelincuentes(listadoDelincuentes);
+						
+			}
+	
 	}
 	
 	
