@@ -57,7 +57,7 @@ public class BD {
 				//Muestra el contenido de delincuentes de nuestra base de datos
 					Delincuente D =new Delincuente
 					//Coje los datos para mostrarlos
-					((int)conjuntoResultados.getObject("idDelincuentes"),
+					((int)conjuntoResultados.getObject("IdDelincuentes"),
 					(String)conjuntoResultados.getObject("Nombre"),
 					(String)conjuntoResultados.getObject("Apellidos"),
 					(int)conjuntoResultados.getObject("Edad"),
@@ -122,12 +122,12 @@ public class BD {
 					
 				String sql= " UPDATE  `fichapolicial`.`fichadelincuentes` SET " 
 						
-					Nombre =  '"+Nombre+"'",
-					Apellidos = '"+Apellidos+"'",
-					Edad =  '"+Edad+"'",
-					Altura =  '"+Altura+"'",
-					Crimen =  '"+Crimen+"'"
-					WHERE  `fichadelincuentes`.`IdDelincuentes` ="IdDelincuentes";
+				+ "'Nombre' =  '"+Nombre+"',"
+				+ "'Apellidos = '"+Apellidos+"',"
+				+ "'Edad =  '"+Edad+"',"
+				+ "'Altura =  '"+Altura+"',"
+				+ "'Crimen =  '"+Crimen+"'" +
+				" WHERE  `fichadelincuentes`.`ID` ="+ID+"";
 
 				instruccion.executeUpdate(sql);
 							
