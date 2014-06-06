@@ -236,7 +236,7 @@ public class FichaPolicia extends JFrame {
 				
 				//Borra el Objeto (delincuente) seleccionado
 				delincuentes.removeItemAt(delincuentes.getSelectedIndex());
-				
+				Datos.BorrarDelincuentes(Integer.parseInt(ID.getText()));
 			}
 		});
 		btnBorrar.setBounds(121, 303, 98, 23);

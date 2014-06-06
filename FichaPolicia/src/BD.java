@@ -142,6 +142,28 @@ public class BD {
 						
 			}
 	
+		public void BorrarDelincuentes (int ID){
+			
+			// crea objeto Statement para consultar la base de datos
+				try {
+				instruccion = (Statement) conexion.createStatement();
+				} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				}
+				// insercion en base de datos
+					try {
+						
+					String sql= "DELETE FROM `fichaPolicial`,`fichadelincuentes` WHERE `fichadelincuentes`,`ID` ="+ID+"";
+					instruccion.executeUpdate(sql);
+								
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}			
+							
+				}
+		
 	}
 	
 	
